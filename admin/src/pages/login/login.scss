@@ -1,0 +1,84 @@
+.login{
+    width:100vw;
+    height:100vh;
+    object-fit: cover;
+    background-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100% ),
+    url(https://mppmduse2pmpovwapp.azurewebsites.net/wp-content/uploads/2019/09/netflix-background-9.jpg);
+    background-size: cover;
+    position: relative;
+
+    .top{
+        display: flex;
+        img{
+            height:40px;
+            margin-left: 20px;
+            margin-top: 20px;
+        }
+        .signBtn{
+            position: absolute;
+            right: 0;
+            margin-right: 20px;
+            margin-top: 20px;
+            padding: 5px 10px;
+            background-color: red;
+            border: none;
+            color: white;
+            font-weight: 500;
+            font-size: 16px;
+            cursor: pointer; 
+            z-index: 2;
+        }
+    }
+    .content{
+        width: 100%;
+        height: 100%;
+        color: white;
+        position: absolute; 
+        top: 0;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        
+        form{
+            width: 300px;
+            height: 300px;
+            background-color:#0b0b0b;
+            padding: 30px;
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+
+            input{
+                height: 40px;
+                border-radius: 5px;
+                background-color: gray;
+                color: white;
+                padding-left: 10px;
+                &::placeholder{
+                    color: lightgray;
+                }
+            }
+
+            button{
+                height: 40px;
+                border-radius: 5px;
+                background-color: red;
+                color: white;
+                border: none;
+                font-size: 18px;
+                font-weight: 500;
+                cursor: pointer;
+            }
+
+            span{
+                color: lightgray;
+                b{
+                    color: white;
+                }
+            }
+        }
+    }
+}

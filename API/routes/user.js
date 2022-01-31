@@ -77,7 +77,7 @@ router.get('/stats', authenticateAdminOnly, async (req, res) => {
             {
                 $group: {
                     _id: "$month",
-                    year: "year",
+                    // _idY: "$year",
                     total: { $sum: 1 },
                 },
             },

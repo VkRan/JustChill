@@ -11,7 +11,7 @@ router.post('/createUser', async (req, res) => {
         const user = await User.create(req.body);
         const authToken = generateAccessToken(user);
         res.cookie('AuthToken', authToken, { httpOnly: true, maxAge: maxAge * 1000, sameSite: "lax" });
-        res.status(201).json({ user: user._id });
+        res.status(201).json({ user: user._id, isAdmin: user.isAdmin });
 
     } catch (error) {
         const errors = handleErrors(error);
@@ -27,7 +27,7 @@ router.post('/login', async (req, res) => {
         const user = await User.login(email, password);
         const authToken = generateAccessToken(user);
         res.cookie('AuthToken', authToken, { httpOnly: true, maxAge: maxAge * 1000, sameSite: "lax" });
-        res.status(200).json({ user: user._id, token: authToken});
+        res.status(200).json({ user: user._id, isAdmin: user.isAdmin });
 
     } catch (error) {
         const errors = handleErrors(error);
