@@ -67,7 +67,7 @@ export default function ProductList() {
       renderCell: (params) => {
         return (
           <>
-            <Link to={{ pathname: `/movies/${params.row._id}` }}>
+            <Link to={'/movies/'+ params.row._id} state = {params.row} >
               <button className="productListEdit">Edit</button>
             </Link>
             <DeleteOutline
