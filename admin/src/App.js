@@ -9,9 +9,8 @@ import ProductList from "./pages/productList/ProductList";
 import Product from "./pages/product/Product";
 import NewProduct from "./pages/newProduct/NewProduct";
 import Login from "./pages/login/Login";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { AuthContext } from "./context/authContext/AuthContext";
-import Cookies from "js-cookie";
 import {
   BrowserRouter as Router,
   Routes,
@@ -21,11 +20,6 @@ import {
 
 function App() {
   const { user } = useContext(AuthContext);
-  useEffect(() => {
-    const temp = Cookies.get('AuthToken');
-    console.log("temp: ", temp);
-  }, []);
-
   return (
     <Router>
       {user ?
@@ -40,7 +34,7 @@ function App() {
               <Route exact path="/user/:userId" element={<User />} />
               <Route exact path="/newUser" element={<NewUser />} />
               <Route exact path="/movies" element={<ProductList />} />
-              <Route exact path="/product/:productId" element={<Product />} />
+              <Route exact path="/movies/:moviesId" element={<Product />} />
               <Route exact path="/newproduct" element={<NewProduct />} />
             </Routes>
           </div>

@@ -1,22 +1,20 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import "./product.css";
-import Chart from "../../components/chart/Chart"
-import {productData} from "../../dummyData"
 import { Publish } from "@material-ui/icons";
 
 export default function Product() {
+    const location = useLocation();
+    console.log(location);
+    // const movie = location.movie;
   return (
     <div className="product">
       <div className="productTitleContainer">
-        <h1 className="productTitle">Product</h1>
+        <h1 className="productTitle">Movie</h1>
         <Link to="/newproduct">
           <button className="productAddButton">Create</button>
         </Link>
       </div>
       <div className="productTop">
-          <div className="productTopLeft">
-              <Chart data={productData} dataKey="Sales" title="Sales Performance"/>
-          </div>
           <div className="productTopRight">
               <div className="productInfoTop">
                   <img src="https://images.pexels.com/photos/7156886/pexels-photo-7156886.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" alt="" className="productInfoImg" />
@@ -61,7 +59,7 @@ export default function Product() {
               <div className="productFormRight">
                   <div className="productUpload">
                       <img src="https://images.pexels.com/photos/7156886/pexels-photo-7156886.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" alt="" className="productUploadImg" />
-                      <label for="file">
+                      <label htmlFor="file">
                           <Publish/>
                       </label>
                       <input type="file" id="file" style={{display:"none"}} />
