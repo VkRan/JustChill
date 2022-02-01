@@ -1,8 +1,13 @@
 import React from "react";
 import "./topbar.css";
 import { NotificationsNone, Language, Settings } from "@material-ui/icons";
+import Cookies from 'js-cookie';
 
 export default function Topbar() {
+  const ClickHandler = async () => {
+    Cookies.remove('AuthToken');
+    window.location.reload();
+  }
   return (
     <div className="topbar">
       <div className="topbarWrapper">
@@ -10,6 +15,7 @@ export default function Topbar() {
           <span className="logo">lamaadmin</span>
         </div>
         <div className="topRight">
+          <button className="LogOut" value="/login" onClick={ClickHandler}> Logout </button>
           <div className="topbarIconContainer">
             <NotificationsNone />
             <span className="topIconBadge">2</span>

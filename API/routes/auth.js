@@ -10,7 +10,7 @@ router.post('/createUser', async (req, res) => {
     try {
         const user = await User.create(req.body);
         const authToken = generateAccessToken(user);
-        res.cookie('AuthToken', authToken, { httpOnly: true, maxAge: maxAge * 1000, sameSite: "lax" });
+        res.cookie('AuthToken', authToken, { maxAge: maxAge * 1000 });
         res.status(201).json({ user: user._id, isAdmin: user.isAdmin });
 
     } catch (error) {
@@ -26,7 +26,7 @@ router.post('/login', async (req, res) => {
     try {
         const user = await User.login(email, password);
         const authToken = generateAccessToken(user);
-        res.cookie('AuthToken', authToken, { httpOnly: true, maxAge: maxAge * 1000, sameSite: "lax" });
+        res.cookie('AuthToken', authToken, { maxAge: maxAge * 1000 });
         res.status(200).json({ user: user._id, isAdmin: user.isAdmin });
 
     } catch (error) {
