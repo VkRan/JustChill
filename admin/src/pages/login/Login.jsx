@@ -4,13 +4,13 @@ import { AuthContext } from '../../context/authContext/AuthContext';
 import "./login.scss";
 
 const Login = () => {
-    const [email,setEmail] = useState("");
-    const [pass,setPass] = useState("");
-    const {isFetching, dispatch} = useContext(AuthContext);
+    const [email, setEmail] = useState("");
+    const [password, setPass] = useState("");
+    const { isFetching, dispatch } = useContext(AuthContext);
 
     const handleLogin = (e) => {
         e.preventDefault();
-        login({email, pass}, dispatch);
+        login({ email, password }, dispatch);
     }
     return (
         <div className="login">
@@ -22,10 +22,10 @@ const Login = () => {
             <div className="content">
                 <form>
                     <h1>Admin Sign In</h1>
-                    <input type="email" placeholder="Email" onChange={(e)=>(setEmail(e.target.value))} />
-                    <input type="password" placeholder="Password" onChange={(e)=>(setPass(e.target.value))} />
-                    <button className="loginBtn" 
-                        type="submit" 
+                    <input type="email" placeholder="Email" onChange={(e) => (setEmail(e.target.value))} />
+                    <input type="password" placeholder="Password" onChange={(e) => (setPass(e.target.value))} />
+                    <button className="loginBtn"
+                        type="submit"
                         onClick={handleLogin}
                         disabled={isFetching}
                     >

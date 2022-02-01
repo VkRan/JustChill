@@ -55,3 +55,21 @@
     border-radius: 50%;
     cursor: pointer;
 }
+
+.LogOut {
+  background: #3bb077;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 8px;
+  outline: none;
+  margin-right: 15px;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.25s ease-in-out;
+}
+
+.LogOut:active{
+  color: #3bb077;
+  background-color: white;
+}
