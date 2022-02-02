@@ -2,14 +2,13 @@ import { Link, useLocation } from "react-router-dom";
 import "./product.css";
 import { Publish } from "@material-ui/icons";
 
-export default function Product(props) {
+export default function Product() {
     const location = useLocation();
-    console.log(location);
     const movie = location.state;
   return (
     <div className="product">
       <div className="productTitleContainer">
-        <h1 className="productTitle">Movie</h1>
+        <h1 className="productTitle">{movie.isSeries? 'Series' : 'Movie'}</h1>
         <Link to="/newproduct">
           <button className="productAddButton">Create</button>
         </Link>
@@ -44,17 +43,17 @@ export default function Product(props) {
           <form className="productForm">
               <div className="productFormLeft">
                   <label>Movie Title</label>
-                  <input type="text" placeholder={movie.title?movie.title:"title"} />
+                  <input type="text" placeholder={movie.title?movie.title:"Enter title"} />
                   <label>Year</label>
-                  <input type="text" placeholder={movie.year?movie.year:"year"} />
+                  <input type="text" placeholder={movie.year?movie.year:"Enter year"} />
                   <label>Genre</label>
-                  <input type="text" placeholder={movie.genre?movie.genre:"genre"} />
+                  <input type="text" placeholder={movie.genre?movie.genre:"Enter genre"} />
                   <label>Limit</label>
-                  <input type="text" placeholder={movie.limit?movie.limit:"limit"} />
+                  <input type="text" placeholder={movie.limit?movie.limit:"Enter age limit"} />
                   <label>Trailer</label>
-                  <input type="file" placeholder={movie.trailer?movie.trailer:"trailer"} />
+                  <input type="file" placeholder={movie.trailer?movie.trailer:"Insert trailer"} />
                   <label>Video</label>
-                  <input type="file" placeholder={movie.video?movie.video:"video"} />
+                  <input type="file" placeholder={movie.video?movie.video:"Insert video"} />
               </div>
               <div className="productFormRight">
                   <div className="productUpload">
