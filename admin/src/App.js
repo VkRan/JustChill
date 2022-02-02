@@ -7,8 +7,10 @@ import User from "./pages/user/User";
 import NewUser from "./pages/newUser/NewUser";
 import ProductList from "./pages/productList/ProductList";
 import Product from "./pages/product/Product";
+import MovieList from "./pages/movieList/MovieList";
 import NewProduct from "./pages/newProduct/NewProduct";
 import Login from "./pages/login/Login";
+import List from "./pages/list/List";
 import { useContext } from "react";
 import { AuthContext } from "./context/authContext/AuthContext";
 import {
@@ -36,6 +38,9 @@ function App() {
               <Route exact path="/movies" element={<ProductList />} />
               <Route exact path="/movies/:moviesId" element={<Product />} />
               <Route exact path="/newproduct" element={<NewProduct />} />
+              <Route exact path="/list" element={<MovieList />} />
+              <Route exact path="/list/:listId" element={<List />} />
+              <Route exact path="/newList" element={<NewProduct />} />
             </Routes>
           </div>
         </div>
