@@ -1,11 +1,33 @@
 import axios from "axios";
-import { getMovieSuccess, getMovieFailure, getMovieStart, createMovieSuccess, createMovieFailure, createMovieStart, deleteMovieFailure, deleteMovieStart, deleteMovieSuccess } from "./MovieAction";
+import { getMovieSuccess,
+     getMovieFailure,
+     getMovieStart, 
+     createMovieSuccess, 
+     createMovieFailure, 
+     createMovieStart, 
+     deleteMovieFailure, 
+     deleteMovieStart, 
+     deleteMovieSuccess,
+     updateMovieFailure,
+     updateMovieSuccess,
+     updateMovieStart
+} from "./MovieAction";
 
 //Fetching movies
 export const getMovie = async (dispatch) => {
     dispatch(getMovieStart());
     try {
         const res = await axios.get("movie");
+        dispatch(getMovieSuccess(res.data));
+    } catch (err) {
+        dispatch(getMovieFailure());
+    }
+};
+
+export const getMovie2 = async (dispatch) => {
+    dispatch(getMovieStart());
+    try {
+        const res = await axios.get("../movie");
         dispatch(getMovieSuccess(res.data));
     } catch (err) {
         dispatch(getMovieFailure());
@@ -20,6 +42,17 @@ export const createMovie = async (movie, dispatch) => {
         dispatch(createMovieSuccess(res.data));
     } catch (err) {
         dispatch(createMovieFailure());
+    }
+};
+
+//Updating a new movie
+export const updateMovie = async (movie, dispatch) => {
+    dispatch(updateMovieStart());
+    try {
+        const res = await axios.put("movie/"+movie._id, movie);
+        dispatch(updateMovieSuccess(res.data));
+    } catch (err) {
+        dispatch(updateMovieFailure());
     }
 };
 

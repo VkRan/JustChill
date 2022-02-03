@@ -4,6 +4,7 @@ import storage from '../../firebase';
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { createMovie } from "../../context/movieContext/apiCalls";
 import { MovieContext } from "../../context/movieContext/MovieContext";
+import { useNavigate } from "react-router";
 
 export default function NewProduct() {
   const { dispatch, error } = useContext(MovieContext);
@@ -14,6 +15,7 @@ export default function NewProduct() {
   const [trailer, setTrailer] = useState(null);
   const [video, setVideo] = useState(null);
   const [uploaded, setUploaded] = useState(false);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -58,7 +60,7 @@ export default function NewProduct() {
     if(error)
       window.alert("Fill in all the compulsory fields");
     else
-      window.location.reload();
+      navigate("/movies");
   }
 
   const handleUpload = (event) => {

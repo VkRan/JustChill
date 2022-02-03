@@ -91,7 +91,7 @@ export default function ProductList() {
         checkboxSelection
         getRowId={row => row._id}
       />
-      <Link to="/newproduct">
+      <Link to="/newMovie">
         <button className="productAddButton">Create</button>
       </Link>
     </div>

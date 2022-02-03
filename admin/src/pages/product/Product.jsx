@@ -1,15 +1,19 @@
 import { Link, useLocation } from "react-router-dom";
 import "./product.css";
 import { Publish } from "@material-ui/icons";
+import { updateMovie } from "../../context/movieContext/apiCalls";
 
 export default function Product() {
     const location = useLocation();
     const movie = location.state;
+    const handleUpdate = ()=>{
+        console.log("to be completed");
+    }
   return (
     <div className="product">
       <div className="productTitleContainer">
         <h1 className="productTitle">{movie.isSeries? 'Series' : 'Movie'}</h1>
-        <Link to="/newproduct">
+        <Link to="/newMovie">
           <button className="productAddButton">Create</button>
         </Link>
       </div>
@@ -63,7 +67,7 @@ export default function Product() {
                       </label>
                       <input type="file" id="file" style={{display:"none"}} />
                   </div>
-                  <button className="productButton">Update</button>
+                  <button className="productButton" onClick={handleUpdate} >Update</button>
               </div>
           </form>
       </div>

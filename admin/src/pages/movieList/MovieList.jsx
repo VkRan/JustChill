@@ -68,7 +68,7 @@ export default function MovieList() {
         checkboxSelection
         getRowId={row => row._id}
       />
-      <Link to="/newproduct">
+      <Link to="/newList">
         <button className="productAddButton">Create</button>
       </Link>
     </div>

@@ -19,6 +19,7 @@ import {
   Route,
   Navigate
 } from "react-router-dom";
+import NewList from "./pages/newList/NewList";
 
 function App() {
   const { user } = useContext(AuthContext);
@@ -37,10 +38,10 @@ function App() {
               <Route exact path="/newUser" element={<NewUser />} />
               <Route exact path="/movies" element={<ProductList />} />
               <Route exact path="/movies/:moviesId" element={<Product />} />
-              <Route exact path="/newproduct" element={<NewProduct />} />
+              <Route exact path="/newMovie" element={<NewProduct />} />
               <Route exact path="/list" element={<MovieList />} />
               <Route exact path="/list/:listId" element={<List />} />
-              <Route exact path="/newList" element={<NewProduct />} />
+              <Route exact path="/newList" element={<NewList />} />
             </Routes>
           </div>
         </div>

@@ -26,7 +26,7 @@ const ListReducer = (state, action) => {
             };
         case "CREATE_LIST_SUCCESS":
             return {
-                list: [...state.movies, action.payload],
+                list: [...state.list, action.payload],
                 isFetching: false,
                 error: false
             };
@@ -36,6 +36,26 @@ const ListReducer = (state, action) => {
                 isFetching: false,
                 error: true
             };
+        
+            case "UPDATE_LIST_START":
+                return {
+                    ...state,
+                    isFetching: true,
+                    error: false,
+                };
+            case "UPDATE_LIST_SUCCESS":
+                return {
+                    list: state.list.map((listItem) => listItem._id === action.payload._id && action.payload),
+                    isFetching: false,
+                    error: false,
+                };
+            case "UPDATE_LIST_FAILURE":
+                return {
+                    ...state,
+                    isFetching: false,
+                    error: true,
+                };
+
 
         case "DELETE_LIST_START":
             return {
