@@ -6,23 +6,26 @@ import List from "../../components/list/List";
 import axios from 'axios';
 
 const Home = (props) => {
-    const[lists,setLists]=useState([]);
+    const [lists, setLists] = useState([]);
+    const [genre, setGenre] = useState("");
 
     useEffect(() => {
         const randomList = async () => {
             try {
-                const response = await axios.get(`list${props.type ? '?type=' + props.type : ''}${props.genre ? '&genre=' + props.genre : ''}`);
+                if(genre==="genre")
+                    setGenre("");
+                const response = await axios.get(`list${props.type ? '?type=' + props.type : ''}${genre ? '&genre=' + genre : ''}`);
                 setLists(response.data);
             } catch (error) {
                 console.log(error);
             }
         }
         randomList();
-    }, [props.type, props.genre])
+    }, [props.type, genre])
     return (
         <div className="home">
             <Navbar />
-            <Featured type={props.type} />
+            <Featured type={props.type} setGenre={setGenre} />
             {lists.map((list)=>(
                 <List list={list} key={list._id}/>
             ))}

@@ -1,3 +1,5 @@
+@import "../../app.scss";
+
 .navbar{
     width: 100%;
     color:white;
@@ -23,10 +25,24 @@
             img{
                 height: 25px;
                 margin-right: 40px;
+
+                @include mobile{
+                    display:none
+                }
             }
             span{
                 margin-right: 20px;
                 cursor: pointer;
+
+                @include tablet{
+                    display:none
+                }
+
+                &.mainLinks{
+                    @include tablet{
+                        display:block
+                    }
+                }
             }
         }
         .right{
@@ -48,6 +64,24 @@
                     display: none;
                     background-color: var(--main-color);
                     border-radius: 5px;
+
+                    .LogOut {
+                        background: #3bb077;
+                        border: none;
+                        padding: 5px 10px;
+                        border-radius: 8px;
+                        outline: none;
+                        margin-right: 15px;
+                        color: white;
+                        font-size: 15px;
+                        cursor: pointer;
+                        transition: all 0.25s ease-in-out;
+                      }
+                      
+                      .LogOut:active{
+                        color: #3bb077;
+                        background-color: white;
+                      }
                 }
                 span{
                     padding: 10px;
