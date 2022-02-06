@@ -10,11 +10,11 @@ router.put('/:id', authenticate, async (req, res) => {
         if (!user)
             return res.status(404).json({ error: { alert: "Not Found!" } });
 
-        user = await User.findByIdAndUpdate(req.user.id, { $set: req.body }, { new: true, runValidators: true });
+        user = await User.findByIdAndUpdate(req.body._id, { $set: req.body }, { new: true, runValidators: true });
         return res.status(200).json(user);
     } catch (error) {
         const errors = handleErrors(error);
-        return res.status(500).json({ error: errors });
+        return res.status(500).json({ error: errors, internal: { alert: error.message } });
     }
 });
 
@@ -52,8 +52,8 @@ router.get('/', authenticateAdminOnly, async (req, res) => {
     const query = req.query.new;
     try {
         const users = query
-            ? await User.find().sort({ _id: -1 }).limit(2)
-            : await User.find();
+            ? await User.find().select("-password").sort({ _id: -1 }).limit(10)
+            : await User.find().select("-password");
         res.status(200).json(users);
     } catch (error) {
         return res.status(500).json({ error: { alert: error.message } });

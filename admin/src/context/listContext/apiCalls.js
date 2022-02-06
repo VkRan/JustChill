@@ -1,23 +1,24 @@
 import axios from "axios";
-import { getListSuccess, 
-    getListFailure, 
-    getListStart, 
-    createListSuccess, 
-    createListFailure, 
-    createListStart, 
-    deleteListFailure, 
-    deleteListStart, 
+import {
+    getListSuccess,
+    getListFailure,
+    getListStart,
+    createListSuccess,
+    createListFailure,
+    createListStart,
+    deleteListFailure,
+    deleteListStart,
     deleteListSuccess,
     updateListFailure,
     updateListStart,
-    updateListSuccess 
+    updateListSuccess
 } from "./ListAction";
 
 //Fetching lists
 export const getList = async (dispatch) => {
     dispatch(getListStart());
     try {
-        const res = await axios.get("/list");
+        const res = await axios.get("http://localhost:5000/api/list", { withCredentials: true });
         dispatch(getListSuccess(res.data));
     } catch (err) {
         dispatch(getListFailure());
@@ -28,7 +29,7 @@ export const getList = async (dispatch) => {
 export const createList = async (list, dispatch) => {
     dispatch(createListStart());
     try {
-        const res = await axios.post("/list", list);
+        const res = await axios.post("http://localhost:5000/api/list", list, { withCredentials: true });
         dispatch(createListSuccess(res.data));
     } catch (err) {
         dispatch(createListFailure());
@@ -39,7 +40,7 @@ export const createList = async (list, dispatch) => {
 export const updateList = async (list, dispatch) => {
     dispatch(updateListStart());
     try {
-        const res = await axios.put("/list/"+list.id, list);
+        const res = await axios.put("http://localhost:5000/api/list/" + list._id, list, { withCredentials: true });
         dispatch(updateListSuccess(res.data));
     } catch (err) {
         dispatch(updateListFailure());
@@ -50,7 +51,7 @@ export const updateList = async (list, dispatch) => {
 export const deleteList = async (id, dispatch) => {
     dispatch(deleteListStart());
     try {
-        await axios.delete("/list/"+id);
+        await axios.delete("http://localhost:5000/api/list/" + id, { withCredentials: true });
         dispatch(deleteListSuccess(id));
     } catch (err) {
         dispatch(deleteListFailure());

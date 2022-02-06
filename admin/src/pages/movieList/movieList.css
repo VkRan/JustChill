@@ -1,13 +1,13 @@
-.productList{
+.movieList{
     flex: 4;
 }
 
-.productListItem{
+.movieListItem{
     display: flex;
     align-items: center;
 }
 
-.productListImg {
+.movieListImg {
     width: 32px;
     height: 32px;
     border-radius: 50%;
@@ -15,7 +15,7 @@
     margin-right: 10px;
   }
 
-.productListEdit{
+.movieListEdit{
     border: none;
     border-radius: 10px;
     padding: 5px 10px;
@@ -25,12 +25,12 @@
     margin-right: 20px;
 }
 
-.productListDelete{
+.movieListDelete{
     color: red;
     cursor: pointer;
 }
 
-.productAddButton {
+.movieAddButtonRight {
     width: 80px;
     border: none;
     padding: 5px;
@@ -41,5 +41,5 @@
     cursor: pointer;
     position: absolute;
     top: 73px;
-    right: 80px;
+    right: 50px;
   }

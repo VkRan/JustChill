@@ -1,33 +1,24 @@
 import axios from "axios";
-import { getMovieSuccess,
-     getMovieFailure,
-     getMovieStart, 
-     createMovieSuccess, 
-     createMovieFailure, 
-     createMovieStart, 
-     deleteMovieFailure, 
-     deleteMovieStart, 
-     deleteMovieSuccess,
-     updateMovieFailure,
-     updateMovieSuccess,
-     updateMovieStart
+import {
+    getMovieSuccess,
+    getMovieFailure,
+    getMovieStart,
+    createMovieSuccess,
+    createMovieFailure,
+    createMovieStart,
+    deleteMovieFailure,
+    deleteMovieStart,
+    deleteMovieSuccess,
+    updateMovieFailure,
+    updateMovieSuccess,
+    updateMovieStart
 } from "./MovieAction";
 
 //Fetching movies
 export const getMovie = async (dispatch) => {
     dispatch(getMovieStart());
     try {
-        const res = await axios.get("movie");
-        dispatch(getMovieSuccess(res.data));
-    } catch (err) {
-        dispatch(getMovieFailure());
-    }
-};
-
-export const getMovie2 = async (dispatch) => {
-    dispatch(getMovieStart());
-    try {
-        const res = await axios.get("../movie");
+        const res = await axios.get("http://localhost:5000/api/movie", { withCredentials: true });
         dispatch(getMovieSuccess(res.data));
     } catch (err) {
         dispatch(getMovieFailure());
@@ -38,19 +29,22 @@ export const getMovie2 = async (dispatch) => {
 export const createMovie = async (movie, dispatch) => {
     dispatch(createMovieStart());
     try {
-        const res = await axios.post("movie", movie);
+        const res = await axios.post("http://localhost:5000/api/movie", movie, { withCredentials: true });
         dispatch(createMovieSuccess(res.data));
     } catch (err) {
         dispatch(createMovieFailure());
     }
 };
 
-//Updating a new movie
+//Updating an existing movie
 export const updateMovie = async (movie, dispatch) => {
+    console.log("Hello");
     dispatch(updateMovieStart());
+    console.log("World");
     try {
-        const res = await axios.put("movie/"+movie._id, movie);
+        const res = await axios.put("http://localhost:5000/api/movie/" + movie._id, movie, { withCredentials: true });
         dispatch(updateMovieSuccess(res.data));
+        console.log("Success");
     } catch (err) {
         dispatch(updateMovieFailure());
     }
@@ -60,7 +54,7 @@ export const updateMovie = async (movie, dispatch) => {
 export const deleteMovie = async (id, dispatch) => {
     dispatch(deleteMovieStart());
     try {
-        await axios.delete("movie/"+id);
+        await axios.delete("http://localhost:5000/api/movie/" + id, { withCredentials: true });
         dispatch(deleteMovieSuccess(id));
     } catch (err) {
         dispatch(deleteMovieFailure());

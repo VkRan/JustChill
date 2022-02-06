@@ -1,16 +1,16 @@
-import "./productList.css";
+import "./listList.css";
 import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import { useContext, useEffect } from "react";
-import { MovieContext } from "../../context/movieContext/MovieContext";
-import { getMovie, deleteMovie } from "../../context/movieContext/apiCalls";
+import { ListContext } from "../../context/listContext/ListContext";
+import { getList, deleteList } from "../../context/listContext/apiCalls";
 
-export default function ProductList() {
-  const { movies, dispatch } = useContext(MovieContext);
+export default function ListList() {
+  const { list, dispatch } = useContext(ListContext);
 
   const handleDelete = (id) => {
-    deleteMovie(id, dispatch);
+    deleteList(id, dispatch);
   };
 
   const capatilizeFirst = (ele) => {
@@ -18,27 +18,15 @@ export default function ProductList() {
   }
 
   useEffect(() => {
-    getMovie(dispatch);
+    getList(dispatch);
   }, [dispatch]);
 
 
   const columns = [
-    { field: "_id", headerName: "ID", width: 90 },
+    { field: "_id", headerName: "ID", width: 250 },
+    { field: "title", headerName: "Title", width: 250 },
     {
-      field: "movie",
-      headerName: "Movie",
-      width: 200,
-      renderCell: (params) => {
-        return (
-          <div className="productListItem">
-            <img className="productListImg" src={params.row.image} alt="" />
-            {params.row.title}
-          </div>
-        );
-      },
-    },
-    {
-      field: "genre", headerName: "Genre", width: 120,
+      field: "genre", headerName: "Genre", width: 150,
       renderCell: (params) => {
         return (
           <>
@@ -47,18 +35,7 @@ export default function ProductList() {
         )
       }
     },
-    { field: "year", headerName: "Year", width: 120 },
-    { field: "limit", headerName: "Limit", width: 120 },
-    {
-      field: "isSeries", headerName: "Type", width: 120,
-      renderCell: (params) => {
-        return (
-          <>
-            {params.row.isSeries ? <>Series</> : <>Movies</>}
-          </>
-        )
-      }
-    },
+    { field: "type", headerName: "Type", width: 150 },
 
     {
       field: "action",
@@ -67,7 +44,7 @@ export default function ProductList() {
       renderCell: (params) => {
         return (
           <>
-            <Link to={'/movies/' + params.row._id} state={params.row} >
+            <Link to={'/list/' + params.row._id} state={params.row} >
               <button className="productListEdit">Edit</button>
             </Link>
             <DeleteOutline
@@ -83,7 +60,7 @@ export default function ProductList() {
   return (
     <div className="productList">
       <DataGrid
-        rows={movies}
+        rows={list}
         disableSelectionOnClick
         columns={columns}
         pageSize={10}
@@ -91,7 +68,7 @@ export default function ProductList() {
         checkboxSelection
         getRowId={row => row._id}
       />
-      <Link to="/newMovie">
+      <Link to="/newList">
         <button className="productAddButton">Create</button>
       </Link>
     </div>
