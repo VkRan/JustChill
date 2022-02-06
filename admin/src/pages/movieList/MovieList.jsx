@@ -3,14 +3,14 @@ import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import { useContext, useEffect } from "react";
-import { ListContext } from "../../context/listContext/ListContext";
-import { getList, deleteList } from "../../context/listContext/apiCalls";
+import { MovieContext } from "../../context/movieContext/MovieContext";
+import { getMovie, deleteMovie } from "../../context/movieContext/apiCalls";
 
 export default function MovieList() {
-  const { list, dispatch } = useContext(ListContext);
+  const { movies, dispatch } = useContext(MovieContext);
 
   const handleDelete = (id) => {
-    deleteList(id, dispatch);
+    deleteMovie(id, dispatch);
   };
 
   const capatilizeFirst = (ele) => {
@@ -18,24 +18,47 @@ export default function MovieList() {
   }
 
   useEffect(() => {
-    getList(dispatch);
+    getMovie(dispatch);
   }, [dispatch]);
 
 
   const columns = [
-    { field: "_id", headerName: "ID", width: 250 },
-    { field: "title", headerName: "Title", width: 250 },
+    { field: "_id", headerName: "ID", width: 210 },
     {
-      field: "genre", headerName: "Genre", width: 150,
+      field: "movie",
+      headerName: "Movie",
+      width: 190,
+      renderCell: (params) => {
+        return (
+          <div className="movieListItem">
+            <img className="movieListImg" src={params.row.imageSm ? params.row.imageSm : "https://media.istockphoto.com/vectors/error-page-or-file-not-found-icon-vector-id924949200?k=20&m=924949200&s=170667a&w=0&h=-g01ME1udkojlHCZeoa1UnMkWZZppdIFHEKk6wMvxrs="} alt="" />
+            {params.row.title}
+          </div>
+        );
+      },
+    },
+    {
+      field: "genre", headerName: "Genre", width: 140,
       renderCell: (params) => {
         return (
           <>
-            {capatilizeFirst(params.row.genre)}
+            {params.row.genre && capatilizeFirst(params.row.genre)}
           </>
         )
       }
     },
-    { field: "type", headerName: "Type", width: 150 },
+    { field: "year", headerName: "Year", width: 110 },
+    { field: "limit", headerName: "Limit", width: 110 },
+    {
+      field: "isSeries", headerName: "Type", width: 120,
+      renderCell: (params) => {
+        return (
+          <>
+            {params.row.isSeries ? <>Series</> : <>Movies</>}
+          </>
+        )
+      }
+    },
 
     {
       field: "action",
@@ -44,11 +67,11 @@ export default function MovieList() {
       renderCell: (params) => {
         return (
           <>
-            <Link to={'/list/' + params.row._id} state={params.row} >
-              <button className="productListEdit">Edit</button>
+            <Link to={'/movies/' + params.row._id} state={params.row} >
+              <button className="movieListEdit">Edit</button>
             </Link>
             <DeleteOutline
-              className="productListDelete"
+              className="movieListDelete"
               onClick={() => handleDelete(params.row._id)}
             />
           </>
@@ -58,9 +81,9 @@ export default function MovieList() {
   ];
 
   return (
-    <div className="productList">
+    <div className="movieList">
       <DataGrid
-        rows={list}
+        rows={movies}
         disableSelectionOnClick
         columns={columns}
         pageSize={10}
@@ -68,8 +91,8 @@ export default function MovieList() {
         checkboxSelection
         getRowId={row => row._id}
       />
-      <Link to="/newList">
-        <button className="productAddButton">Create</button>
+      <Link to="/newMovie">
+        <button className="movieAddButtonRight">Create</button>
       </Link>
     </div>
   );

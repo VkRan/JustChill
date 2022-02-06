@@ -1,6 +1,6 @@
 import "./newList.css";
 import { useState, useContext, useEffect } from 'react';
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { createList } from "../../context/listContext/apiCalls";
 import { ListContext } from "../../context/listContext/ListContext";
 import { MovieContext } from "../../context/movieContext/MovieContext";
@@ -8,12 +8,14 @@ import { getMovie } from "../../context/movieContext/apiCalls";
 
 export default function NewList() {
   const { dispatch, error } = useContext(ListContext);
-  const { movies, dispatch: dispatchMovie} = useContext(MovieContext);
-  const [list, setList] = useState(null);
+  const { movies, dispatch: dispatchMovie } = useContext(MovieContext);
+  const [list, setList] = useState({});
   const history = useNavigate();
 
-  useEffect(()=>{
-      getMovie(dispatchMovie);
+  console.log(list);
+
+  useEffect(() => {
+    getMovie(dispatchMovie);
   }, [dispatchMovie])
 
   const handleChange = (e) => {
@@ -22,55 +24,60 @@ export default function NewList() {
   }
 
   const handleContent = (e) => {
-    const value = Array.from(e.target.selectedOptions, (option)=>option.value);
-    setList({...list, [e.target.name]: value});
+    const value = Array.from(e.target.selectedOptions, (option) => option.value);
+    // const value2 = Array.from(e.target.selectedOptions, (option) => option.value.title)
+    setList({ ...list, 'content': value });
+    // setList({ ...list, 'movieNames': value2 });
   }
 
   const handleCreate = (event) => {
     event.preventDefault();
-    createList(list,dispatch);
-    if(error)
+    createList(list, dispatch);
+    if (error)
       window.alert("Fill in all the compulsory fields");
     else
       history("/list");
   }
 
   return (
-    <div className="newProduct">
-      <h1 className="addProductTitle">New Movie</h1>
-      <form className="addProductForm">
-        <div className="addProductItem">
-          <label>Title*</label>
-          <input type="text" placeholder="title" name="title" onChange={handleChange} />
+    <div className="newList">
+      <h1 className="addListTitle">New List</h1>
+      <form className="addListForm">
+        <div className="ListLeft">
+          <div className="addListItem">
+            <label>Title*</label>
+            <input type="text" placeholder="title" name="title" onChange={handleChange} />
+          </div>
+          <div className="addListItem">
+            <label>Genre</label>
+            <input type="text" placeholder="genre" name="genre" onChange={handleChange} />
+          </div>
+          <div className="addListItem">
+            <label>Type</label>
+            <select name="type" defaultValue={"series"} onChange={handleChange}>
+              <option value="movie">Movie</option>
+              <option value="series">Series</option>
+            </select>
+          </div>
         </div>
-        <div className="addProductItem">
-          <label>Genre*</label>
-          <input type="text" placeholder="genre" name="genre" onChange={handleChange} />
-        </div>
-        <div className="addProductItem">
-          <label>Type*</label>
-          <select name="type" onChange={handleChange}>
-            <option>Type</option>
-            <option value="movie">Movie</option>
-            <option value="series">Series</option>
-          </select>
-        </div>
-        <div className="addProductItem">
-          <label>Content</label>
-          <select name="content" onChange={handleContent} multiple>
-            {
-              movies.map((movie)=>(
-                <option key={movie._id} value={movie._id}>{movie.title}</option>
-              ))
-            }
-          </select>
+        <div className="ListRight">
+          <div className="addListItem">
+            <label>Content</label>
+            <select className="ListContent" name="content" onChange={handleContent} multiple>
+              {
+                movies.map((movie) => (
+                  <option key={movie._id} value={movie._id}>{movie.title}</option>
+                ))
+              }
+            </select>
+          </div>
         </div>
 
-        <button className="addProductButton" onClick={handleCreate}>
-          Create
-        </button>
 
       </form>
+      <button className="addListButton" onClick={handleCreate}>
+        Create
+      </button>
     </div>
   );
 }

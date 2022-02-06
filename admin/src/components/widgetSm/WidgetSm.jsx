@@ -9,7 +9,6 @@ export default function WidgetSm() {
     const getNewUsers = async () => {
       try {
         const res = await axios.get('/user?new=true');
-        console.log(res.data);
         setNewUsers(res.data);
       } catch (error) {
         console.log(error);
@@ -22,10 +21,10 @@ export default function WidgetSm() {
       <span className="widgetSmTitle">New Join Members</span>
       <ul className="widgetSmList">
         {
-          newUsers.map((user,i)=>(
+          newUsers.map((user, i) => (
             <li key={i} className="widgetSmListItem">
               <img
-                src={user.profilePicture||"https://pbs.twimg.com/media/D8tCa48VsAA4lxn.jpg"}
+                src={user.profilePicture || "https://pbs.twimg.com/media/D8tCa48VsAA4lxn.jpg"}
                 alt=""
                 className="widgetSmImg"
               />
@@ -39,7 +38,7 @@ export default function WidgetSm() {
             </li>
           ))
         }
-    
+
       </ul>
     </div>
   );

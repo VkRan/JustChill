@@ -26,14 +26,12 @@ export default function Home() {
     const getStats = async () => {
       try {
         const res = await axios.get('user/stats');
-        console.log(res.data)
         res.data.map((item) =>
           setStats(prev => [
             ...prev,
             { name: MONTHS[item._id - 1], "Users": item.total }
           ]))
       } catch (error) {
-        console.log(error);
       }
     }
     getStats();

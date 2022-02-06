@@ -4,28 +4,22 @@ import { updateList } from "../../context/listContext/apiCalls";
 import { useState, useContext, useEffect } from "react";
 import { ListContext } from "../../context/listContext/ListContext";
 import { MovieContext } from "../../context/movieContext/MovieContext";
-import { getMovie2 } from "../../context/movieContext/apiCalls";
+import { getMovie } from "../../context/movieContext/apiCalls";
 
 export default function List() {
-    const location = useLocation();
-    const listItem = location.state;
+    const [list, setList] = useState(useLocation().state);
     const { dispatch, error } = useContext(ListContext);
     const { movies, dispatch: dispatchMovie } = useContext(MovieContext);
-    const [list, setList] = useState(null);
     const navigate = useNavigate();
 
     useEffect(() => {
-        getMovie2(dispatchMovie);
+        getMovie(dispatchMovie);
     }, [dispatchMovie])
 
     const handleChange = (e) => {
         const value = e.target.value;
         setList({ ...list, [e.target.name]: value });
     }
-
-    useEffect(() => {
-        setList({ ...list, id: listItem._id })
-    }, [])
 
     const handleContent = (e) => {
         const value = Array.from(e.target.selectedOptions, (option) => option.value);
@@ -38,41 +32,42 @@ export default function List() {
         if (error)
             window.alert("Fill in all the compulsory fields");
         else
-            navigate(-1);
+            navigate("/list");
     }
 
+    console.log(list);
     return (
-        <div className="product">
-            <div className="productTitleContainer">
-                <h1 className="productTitle">List</h1>
+        <div className="list">
+            <div className="listTitleContainer">
+                <h1 className="listTitle">List</h1>
                 <Link to="/newList">
-                    <button className="productAddButton">Create</button>
+                    <button className="listAddButton">Create</button>
                 </Link>
             </div>
-            <div className="productTop">
-                <div className="productTopRight">
-                    <div className="productInfoTop">
-                        <span className="productName">{listItem.title}</span>
+            <div className="listTop">
+                <div className="listTopRight">
+                    <div className="listInfoTop">
+                        <span className="listName">{list.title}</span>
                     </div>
-                    <div className="productInfoBottom">
-                        <div className="productInfoItem">
-                            <span className="productInfoKey">ID:</span>
-                            <span className="productInfoValue">{listItem._id}</span>
+                    <div className="listInfoBottom">
+                        <div className="listInfoItem">
+                            <span className="listInfoKey">ID:</span>
+                            <span className="listInfoValue">{list._id}</span>
                         </div>
-                        <div className="productInfoItem">
-                            <span className="productInfoKey">Genre:</span>
-                            <span className="productInfoValue">{listItem.genre}</span>
+                        <div className="listInfoItem">
+                            <span className="listInfoKey">Genre:</span>
+                            <span className="listInfoValue">{list.genre}</span>
                         </div>
-                        <div className="productInfoItem">
-                            <span className="productInfoKey">Type:</span>
-                            <span className="productInfoValue">{listItem.type}</span>
+                        <div className="listInfoItem">
+                            <span className="listInfoKey">Type:</span>
+                            <span className="listInfoValue">{list.type}</span>
                         </div>
-                        <div className="productInfoItem">
-                            <span className="productInfoKey">Name:</span>
-                            <span className="productInfoValue">
+                        <div className="listInfoItem">
+                            <span className="listInfoKey">Name:</span>
+                            <span className="listInfoValue">
                                 {
-                                    listItem.content.map((item) => (
-                                        <div>{item}</div>
+                                    list.content.map((listItem) => (
+                                        <div key={listItem._id}>{listItem}</div>
                                     ))
                                 }
                             </span>
@@ -81,13 +76,14 @@ export default function List() {
                     </div>
                 </div>
             </div>
-            <div className="productBottom">
-                <form className="productForm">
-                    <div className="productFormLeft">
+            <div className="listBottom">
+                <form className="listForm">
+                    <div className="listFormLeft">
+
                         <label>List Title</label>
-                        <input type="text" name="title" placeholder={listItem.title ? listItem.title : "Enter list title"} onChange={handleChange} />
+                        <input type="text" name="title" placeholder={list.title ? list.title : "Enter list title"} onChange={handleChange} />
                         <label>Genre</label>
-                        <input type="text" name="genre" placeholder={listItem.genre ? listItem.genre : "Enter genre"} onChange={handleChange} />
+                        <input type="text" name="genre" placeholder={list.genre ? list.genre : "Enter genre"} onChange={handleChange} />
                         <label>Type</label>
                         <select name="type" onChange={handleChange}>
                             <option>Type</option>
@@ -104,8 +100,8 @@ export default function List() {
                         </select>
 
                     </div>
-                    <div className="productFormRight">
-                        <button className="productButton" onClick={handleUpdate}>Update</button>
+                    <div className="listFormRight">
+                        <button className="listButton" onClick={handleUpdate}>Update</button>
                     </div>
                 </form>
             </div>

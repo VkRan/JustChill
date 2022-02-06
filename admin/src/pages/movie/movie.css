@@ -1,16 +1,16 @@
-.product {
+.movie {
   flex: 4;
   padding: 20px;
 }
 
-.productTitleContainer {
+.movieTitleContainer {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-left: 15px;
 }
 
-.productAddButton {
+.movieAddButton {
   width: 80px;
   border: none;
   padding: 5px;
@@ -21,16 +21,16 @@
   cursor: pointer;
 }
 
-.productTop {
+.movieTop {
   display: flex;
 }
 
-.productTopLeft,
-.productTopRight {
+.movieTopLeft,
+.movieTopRight {
   flex: 1;
 }
 
-.productTopRight {
+.movieTopRight {
   padding: 20px;
   margin: 20px;
   -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
@@ -40,7 +40,7 @@
   justify-content: space-evenly;
 }
 
-.productInfoImg {
+.movieInfoImg {
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -48,75 +48,75 @@
   margin-right: 20px;
 }
 
-.productInfoTop {
+.movieInfoTop {
   display: flex;
   justify-content: center;
   flex-direction: column;
 }
 
-.productInfoTop > img {
+.movieInfoTop > img {
   width: 520px;
   height: 640px;
   object-fit: contain;
 }
 
-.productName {
+.movieName {
   font-weight: 600;
   font-size: 28px;
   text-align: center;
 }
 
-.productInfoBottom {
+.movieInfoBottom {
   margin-top: 10px;
 }
 
-.productInfoItem {
+.movieInfoItem {
   width: 200px;
   font-size: 20px;
 }
 
-.productInfoKey {
+.movieInfoKey {
   margin-right: 10px;
 }
 
-.productInfoValue {
+.movieInfoValue {
   font-weight: 300;
 }
 
-.productBottom {
+.movieBottom {
   padding: 20px;
   margin: 20px;
   -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
   box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
 }
 
-.productForm {
+.movieForm {
   display: flex;
   justify-content: space-between;
 }
 
-.productFormLeft {
+.movieFormLeft {
   display: flex;
   flex-direction: column;
 }
 
-.productFormLeft > label {
+.movieFormLeft > label {
   margin-bottom: 10px;
   color: gray;
 }
 
-.productFormLeft > input {
+.movieFormLeft > input {
   margin-bottom: 10px;
   border: none;
   padding: 5px;
   border-bottom: 1px solid gray;
 }
 
-.productFormLeft >select{
+.movieFormLeft >select{
   margin-bottom: 10px;
 }
 
-.productUploadImg{
+.movieUploadImg{
   width: 100px;
   height: 100px;
   border-radius: 10px;
@@ -124,18 +124,18 @@
   margin-right: 20px;
 }
 
-.productFormRight{
+.movieFormRight{
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 
-.productUpload{
+.movieUpload{
   display: flex;
   align-items: center;
 }
 
-.productButton{
+.addMovieButton{
   border: none;
   padding: 5px;
   border-radius: 5px;

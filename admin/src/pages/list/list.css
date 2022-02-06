@@ -1,16 +1,16 @@
-.product {
+.list {
   flex: 4;
   padding: 20px;
 }
 
-.productTitleContainer {
+.listTitleContainer {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-left: 15px;
 }
 
-.productAddButton {
+.listAddButton {
   width: 80px;
   border: none;
   padding: 5px;
@@ -21,16 +21,16 @@
   cursor: pointer;
 }
 
-.productTop {
+.listTop {
   display: flex;
 }
 
-.productTopLeft,
-.productTopRight {
+.listTopLeft,
+.listTopRight {
   flex: 1;
 }
 
-.productTopRight {
+.listTopRight {
   padding: 20px;
   margin: 20px;
   -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
@@ -40,7 +40,7 @@
   justify-content: space-evenly;
 }
 
-.productInfoImg {
+.listInfoImg {
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -48,75 +48,75 @@
   margin-right: 20px;
 }
 
-.productInfoTop {
+.listInfoTop {
   display: flex;
   justify-content: center;
   flex-direction: column;
 }
 
-.productInfoTop > img {
+.listInfoTop > img {
   width: 520px;
   height: 640px;
   object-fit: contain;
 }
 
-.productName {
+.listName {
   font-weight: 600;
   font-size: 28px;
   text-align: center;
 }
 
-.productInfoBottom {
+.listInfoBottom {
   margin-top: 10px;
 }
 
-.productInfoItem {
+.listInfoItem {
   width: 200px;
   font-size: 20px;
 }
 
-.productInfoKey {
+.listInfoKey {
   margin-right: 10px;
 }
 
-.productInfoValue {
+.listInfoValue {
   font-weight: 300;
 }
 
-.productBottom {
+.listBottom {
   padding: 20px;
   margin: 20px;
   -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
   box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
 }
 
-.productForm {
+.listForm {
   display: flex;
   justify-content: space-between;
 }
 
-.productFormLeft {
+.listFormLeft {
   display: flex;
   flex-direction: column;
 }
 
-.productFormLeft > label {
+.listFormLeft > label {
   margin-bottom: 10px;
   color: gray;
 }
 
-.productFormLeft > input {
+.listFormLeft > input {
   margin-bottom: 10px;
   border: none;
   padding: 5px;
   border-bottom: 1px solid gray;
 }
 
-.productFormLeft >select{
+.listFormLeft >select{
   margin-bottom: 10px;
 }
 
-.productUploadImg{
+.listUploadImg{
   width: 100px;
   height: 100px;
   border-radius: 10px;
@@ -124,18 +124,18 @@
   margin-right: 20px;
 }
 
-.productFormRight{
+.listFormRight{
   display: flex;
   flex-direction: column;
   justify-content: space-around;
 }
 
-.productUpload{
+.listUpload{
   display: flex;
   align-items: center;
 }
 
-.productButton{
+.listButton{
   border: none;
   padding: 5px;
   border-radius: 5px;

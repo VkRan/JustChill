@@ -12,6 +12,7 @@ const listSchema = new Schema({
     type: String,
     genre: String,
     content: Array,
+    movieNames: Array
 },
 
     { timestamps: true }
