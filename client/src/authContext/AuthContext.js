@@ -3,7 +3,7 @@ import {createContext, useReducer} from "react";
 import Cookies from "js-cookie";
 
 const INITIAL_STATE = {
-    user: Cookies.get('AuthToken') || null,
+    user: Cookies.get('AuthToken') ? JSON.parse(Cookies.get('AuthToken')) : null,
     isFetching: false,
     error: false
 };

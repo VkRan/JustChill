@@ -1,47 +1,29 @@
-import React, { useRef, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import "./register.scss";
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { registerUser } from '../../authContext/apiCalls';
+import { AuthContext } from '../../authContext/AuthContext';
 
 const Register = () => {
+    const { dispatch, error } = useContext(AuthContext);
     const navigate = useNavigate();
-
-    const [email, setEmail] = useState("");
-    const emailRef = useRef();
-
-    const [password, setPassword] = useState("");
-    const passwordRef = useRef();
-
-    const [userName, setUserName] = useState("");
-    const userNameRef = useRef();
-
-    const [firstName, setFirstName] = useState("");
-    const firstNameRef = useRef();
-
-    const [lastName, setLastName] = useState("");
-    const lastNameRef = useRef();
-
+    const [user, setUser] = useState({});
     const handleSignIn = () => {
         navigate("/login");
     }
 
-    const handleStart = () => {
-        setEmail(emailRef.current.value);
-        setFirstName(firstNameRef.current.value);
-        setLastName(lastNameRef.current.value);
-
+    const handleChange = (e) => {
+        const value = e.target.value;
+        setUser({ ...user, [e.target.name]: value });
     }
-    const handleFinish = async (e) => {
-        e.preventDefault();
-        setPassword(passwordRef.current.value);
-        setUserName(userNameRef.current.value);
 
-        try {
-            await axios.post("auth/createUser", { email, password:"Qwerty37*", rePassword:"Qwerty37*", userName:"hello", firstName, lastName });
-            navigate("/login");
-        } catch (err) {
-            console.log(err);
-        }
+    const handleRegister = async (e) => {
+        e.preventDefault();
+        registerUser(user, dispatch);
+        if (error)
+            window.alert("Fill in all the compulsory fields");
+        else
+           window.location.reload();
     }
     return (
         <div className="register">
@@ -54,7 +36,7 @@ const Register = () => {
                 <h1>Unlimited movies, TV shows, and more.</h1>
                 <h2>Watch anywhere. Cancel anytime</h2>
                 <p>Ready to watch? Enter your email to create or restart your membership.</p>
-                {!email ? (
+                {/* {!email ? (
                     <div className="mail">
                         <input type="email" placeholder="email address" ref={emailRef} />
                         <input type="text" placeholder="first name" ref={firstNameRef} />
@@ -67,9 +49,22 @@ const Register = () => {
                         <input type="password" placeholder="password" ref={passwordRef} />
                         <button className="registerBtn" onClick={handleFinish}>Start</button>
                     </form>
-                )}
+                )} */}
+
+
+                <div className="registerForm">
+                    <div className="name">
+                        <input type="text" className="firstName" name="firstName" placeholder="First Name" onChange={handleChange} />
+                        <input type="text" className="lastName" name="lastName" placeholder="Last Name" onChange={handleChange} />
+                    </div>
+                    <input type="email" name="email" placeholder="Enter email" onChange={handleChange} />
+                    <input type="text" name="userName" placeholder="Enter username" onChange={handleChange} />
+                    <input type="password" name="password" placeholder="Enter password" onChange={handleChange} />
+                    <input type="password" name="rePassword" placeholder="Re-enter password" onChange={handleChange} />
+                    <button className="registerBtn" onClick={handleRegister}>Submit</button>
+                </div>
             </div>
-        </div>
+        </div >
     )
 }
 

@@ -8,7 +8,8 @@ const fetch = (req, res, next) => {
     if (!token)
         return res.status(401).json({ error: "Please authenticate using a valid token!" });
     try {
-        const data = jwt.verify(token, secret);
+        const obj = JSON.parse(token);
+        const data = jwt.verify(obj.authToken, secret);
         req.user = data.user;
         next();
     } catch (err) {
@@ -18,6 +19,7 @@ const fetch = (req, res, next) => {
 
 const authenticate = (req, res, next) => {
     fetch(req, res, () => {
+        console.log(req.user.id, req.user.isAdmin);
         if (req.user.id === req.params.id || req.user.isAdmin)
             next();
         else

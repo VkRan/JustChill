@@ -1,42 +1,42 @@
 import { InfoOutlined, PlayArrow } from '@mui/icons-material';
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import "./featured.scss";
 import axios from 'axios';
 
 const Featured = (props) => {
-    const [random, setRandom] = useState(null);
-    useEffect(()=>{
+    const [random, setRandom] = useState({});
+    useEffect(() => {
         const getRandom = async () => {
             try {
-                const response = await axios.get(`movie/random${props.type ? '?type=' + props.type : ''}`);
+                const response = await axios.get(`http://localhost:5000/api/movie/random${props.type ? '?type=' + props.type : ''}`, { withCredentials: true });
                 setRandom(response.data[0]);
                 console.log(response.data);
             } catch (error) {
                 console.log(error);
             }
-        } 
+        }
         getRandom();
-    },[props.type] )
+    }, [props.type])
     return (
         <div className="featured">
-            {props.type&&(
+            {props.type && (
                 <div className="category">
-                    <span>{props.type==="series"?"Series Genre":"Movie Genre"}</span>
-                    <select name="genre" id="genre" onChange={(e)=>props.setGenre(e.target.value)}>
+                    <span>{props.type === "series" ? "Series Genre" : "Movie Genre"}</span>
+                    <select name="genre" id="genre" onChange={(e) => props.setGenre(e.target.value)}>
                         <option value="genre">All</option>
                         <option value="thriller">Thriller</option>
                         <option value="action">Action</option>
                         <option value="fiction">Fiction</option>
                         <option value="fantasy">Fantasy</option>
                         <option value="historical">Historical</option>
-                    </select> 
+                    </select>
                 </div>
             )}
-            <img width="100%" src={random?random.image:""} alt="" />
+            <img width="100%" src={random.image ? random.image : ""} alt="" />
             <div className="info">
-                <img src="https://occ-0-2590-2186.1.nflxso.net/dnm/api/v6/LmEnxtiAuzezXBjYXPuDgfZ4zZQ/AAAABRKrgH8goki6B50_fsipiwG8-efCu0w57iY4KsMiMOkV_xpwmCR1bwdO-qexN7jGsMEEVHu_udqNGVab2eGM-RxjYidvNBjuWkAE.png?r=df1" alt="" />
+                {random.imageTitle ? <img src={random.imageTitle} alt="" /> : ''}
                 <span className="desc">
-                    {random?random.description:""}
+                    {random.description ? random.description : ""}
                 </span>
                 <div className="buttons">
                     <button className="play">
@@ -47,7 +47,7 @@ const Featured = (props) => {
                         <InfoOutlined />
                         <span>Info</span>
                     </button>
-                </div>     
+                </div>
             </div>
         </div>
     )

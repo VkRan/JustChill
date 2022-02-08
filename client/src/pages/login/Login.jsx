@@ -16,7 +16,7 @@ const Login = () => {
         if (error)
             window.alert("Fill in all the compulsory fields");
         else
-            history("/");
+           window.location.reload();
     }
 
     const handleRegister = (e)=> {

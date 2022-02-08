@@ -1,5 +1,5 @@
 const express = require('express');
-const { authenticate, authenticateAdminOnly } = require('../middleware/TokenVerification');
+const { fetch, authenticateAdminOnly } = require('../middleware/TokenVerification');
 const List = require('../models/List');
 const router = express.Router();
 
@@ -43,7 +43,7 @@ router.delete('/:id', authenticateAdminOnly, async (req, res) => {
 });
 
 //Route-4: Getting details of existing lists
-router.get('/', authenticate, async (req, res) => {
+router.get('/', fetch, async (req, res) => {
     const Qtype = req.query.type;
     const Qgenre = req.query.genre;
     let lists;
