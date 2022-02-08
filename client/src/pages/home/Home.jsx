@@ -12,9 +12,9 @@ const Home = (props) => {
     useEffect(() => {
         const randomList = async () => {
             try {
-                if(genre==="genre")
+                if (genre === "genre")
                     setGenre("");
-                const response = await axios.get(`list${props.type ? '?type=' + props.type : ''}${genre ? '&genre=' + genre : ''}`);
+                const response = await axios.get(`http://localhost:5000/api/list${props.type ? '?type=' + props.type : ''}${props.type && genre ? '&genre=' + genre : ''}`, { withCredentials: true });
                 setLists(response.data);
             } catch (error) {
                 console.log(error);
@@ -26,8 +26,8 @@ const Home = (props) => {
         <div className="home">
             <Navbar />
             <Featured type={props.type} setGenre={setGenre} />
-            {lists.map((list)=>(
-                <List list={list} key={list._id}/>
+            {lists.map((list) => (
+                <List list={list} key={list._id} />
             ))}
         </div>
     )

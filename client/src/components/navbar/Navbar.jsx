@@ -1,10 +1,12 @@
 import { ArrowDropDown, Notifications, Search } from '@mui/icons-material';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import "./navbar.scss";
 import Cookies from 'js-cookie';
+import { AuthContext } from "../../authContext/AuthContext";
 
 const Navbar = () => {
+    const { user } = useContext(AuthContext);
     const ClickHandler = async () => {
         Cookies.remove('AuthToken');
         window.location.reload();
@@ -40,8 +42,12 @@ const Navbar = () => {
                     <div className="profile">
                         <ArrowDropDown className="icon" />
                         <div className="options">
-                            <span>Settings</span>
-                            <button className="LogOut" value="/login" onClick={ClickHandler}> Logout </button>
+                            <span className='OptionItems'>Settings</span>
+                            {
+                                user.isAdmin &&
+                                <a href="https://google.com"><span className="OptionItems"> Admin Page </span></a>
+                            }
+                            <span className="OptionItems" onClick={ClickHandler}> Logout </span>
                         </div>
                     </div>
                 </div>

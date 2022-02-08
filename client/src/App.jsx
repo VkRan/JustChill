@@ -12,20 +12,25 @@ import {
 import { AuthContext } from "./authContext/AuthContext";
 
 const App = () => {
-  const {user} = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   return (
     <Router>
       <Routes>
-        <Route exact path="/" element={user ? <Home /> : <Register />} />
-        <Route path="/register" element={user ? <Home /> : <Register />} />
-        <Route path="/login" element={user ? <Home /> : <Login />} />
-        {user && (
+        <Route exact path="/register" element={user ? <Home /> : <Register />} />
+        <Route exact path="/login" element={user ? <Home /> : <Login />} />
+        {user ?
           <>
+            <Route exact path="/" element={user ? <Home /> : <Register />} />
             <Route path="/movie" element={<Home type="movie" />} />
             <Route path="/series" element={<Home type="series" />} />
             <Route path="/watch" element={<Watch />} />
+            <Route path="*" element={<>
+              <div>
+                <h1>404 Not Found</h1>
+              </div>
+            </>} />
           </>
-        )}
+          : <Route path="*" element={<Login />} />}
       </Routes>
     </Router>
   )

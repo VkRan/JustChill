@@ -6,11 +6,11 @@ const router = express.Router();
 //Route-1: Updating an existing user
 router.put('/:id', authenticate, async (req, res) => {
     try {
-        let user = await User.findById(req.user.id);
+        let user = await User.findById(req.params.id);
         if (!user)
             return res.status(404).json({ error: { alert: "Not Found!" } });
 
-        user = await User.findByIdAndUpdate(req.body._id, { $set: req.body }, { new: true, runValidators: true });
+        user = await User.findByIdAndUpdate(req.params.id ? req.body._id : req.params.id, { $set: req.body }, { new: true, runValidators: true });
         return res.status(200).json(user);
     } catch (error) {
         const errors = handleErrors(error);

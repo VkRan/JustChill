@@ -1,5 +1,5 @@
 const express = require('express');
-const { authenticate, authenticateAdminOnly } = require('../middleware/TokenVerification');
+const { fetch, authenticateAdminOnly } = require('../middleware/TokenVerification');
 const Movie = require('../models/Movie');
 const router = express.Router();
 
@@ -43,7 +43,7 @@ router.delete('/:id', authenticateAdminOnly, async (req, res) => {
 });
 
 //Route-4: Getting details of an existing movie
-router.get('/find/:id', authenticate, async (req, res) => {
+router.get('/find/:id', fetch, async (req, res) => {
     try {
         let movie = await Movie.findById(req.params.id);
         if (!movie)
@@ -56,7 +56,7 @@ router.get('/find/:id', authenticate, async (req, res) => {
 });
 
 //Route-5: Getting details of a random movie/series
-router.get('/random', authenticate, async (req, res) => {
+router.get('/random', fetch, async (req, res) => {
     const type = req.query.type;
     let movies;
     try {
@@ -80,12 +80,12 @@ router.get('/random', authenticate, async (req, res) => {
 });
 
 //Route-6: Filtering details of existing movies
-router.get('/', authenticateAdminOnly, async (req, res) => {
+router.get('/', fetch, async (req, res) => {
     const queryNew = req.query.new;
     try {
         let movies;
         if (queryNew) {
-            movies = await Movie.find().sort({ _id: -1 }).limit(10);
+            movies = await Movie.find().sort({ _id: -1 }).limit(5);
         }
         else {
             movies = await Movie.find();

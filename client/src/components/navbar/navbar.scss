@@ -1,102 +1,98 @@
 @import "../../app.scss";
 
-.navbar{
+.navbar {
     width: 100%;
-    color:white;
+    color: white;
     font-size: 14px;
     position: fixed;
-    top:0;
+    top: 0;
     z-index: 999;
-    background: linear-gradient(to top, transparent 0%, rgb(0,0,0,0.3) 50%);
-    
-    &.scrolled{
+    background: linear-gradient(to top, transparent 0%, rgb(0, 0, 0, 0.3) 50%);
+
+    &.scrolled {
         background-color: var(--main-color);
     }
-    
-    .container{
+
+    .container {
         padding: 0px 50px;
-        display:flex;
-        align-items:center;
+        display: flex;
+        align-items: center;
         justify-content: space-between;
         height: 70px;
-        .left{
+        .left {
             display: flex;
             align-items: center;
-            img{
+            img {
                 height: 25px;
                 margin-right: 40px;
 
-                @include mobile{
-                    display:none
+                @include mobile {
+                    display: none;
                 }
             }
-            span{
+            span {
                 margin-right: 20px;
                 cursor: pointer;
 
-                @include tablet{
-                    display:none
+                @include tablet {
+                    display: none;
                 }
 
-                &.mainLinks{
-                    @include tablet{
-                        display:block
+                &.mainLinks {
+                    @include tablet {
+                        display: block;
                     }
                 }
             }
         }
-        .right{
+        .right {
             display: flex;
             align-items: center;
-            .icon{
+            .icon {
                 margin: 0px 15px;
                 cursor: pointer;
             }
-            img{
+            img {
                 width: 30px;
                 height: 30px;
                 border-radius: 5px;
                 object-fit: cover;
-                cursor:pointer;
+                cursor: pointer;
             }
-            .profile{
-                .options{
+            .profile {
+                .options {
                     display: none;
                     background-color: var(--main-color);
                     border-radius: 5px;
-
-                    .LogOut {
-                        background: #3bb077;
-                        border: none;
-                        padding: 5px 10px;
-                        border-radius: 8px;
-                        outline: none;
-                        margin-right: 15px;
+                    
+                    .OptionItems {
+                        text-decoration: none;
+                        background-color: var(--main-color);
                         color: white;
                         font-size: 15px;
                         cursor: pointer;
                         transition: all 0.25s ease-in-out;
-                      }
-                      
-                      .LogOut:active{
-                        color: #3bb077;
-                        background-color: white;
-                      }
+                        display: inline-block;
+                        &:hover {
+                            background-color: white;
+                            color:var(--main-color)
+                        }
+                    }
                 }
-                span{
+                span {
                     padding: 10px;
                     cursor: pointer;
                 }
-                &:hover{
-                    .options{
-                        display:flex;
+                &:hover {
+                    .options {
+                        display: flex;
                         flex-direction: column;
                         position: absolute;
+                        top: 45px;
+                        right: 20px;
                     }
                 }
             }
         }
-        
     }
 }
-
